@@ -6,7 +6,8 @@ import Pagination from "./common/pagination";
 class Movies extends Component {
   state = {
     movies: getMovies(),
-    pageSize: 4
+    pageSize: 4,
+    currentPage: 1
   };
 
   handleDelete = movie => {
@@ -20,59 +21,14 @@ class Movies extends Component {
     movies[index].liked = !movies[index].liked;
     this.setState({ movies });
   };
-  // displayMovies = index => {
-  //   return this.state.movies.map(movie => {
-  //     if (index) {
-  //       return (
-  //         <tr key={movie._id}>
-  //           <td>{movie.title}</td>
-  //           <td>{movie.genre.name}</td>
-  //           <td>{movie.numberInStock}</td>
-  //           <td>{movie.dailyRentalRate}</td>
-  //           <td>
-  //             <Like
-  //               liked={movie.liked}
-  //               onClick={() => this.handleLike(movie)}
-  //             />
-  //           </td>
-  //           <td>
-  //             <button
-  //               onClick={() => this.handleDelete(movie)}
-  //               className="btn btn-danger btn-sm"
-  //             >
-  //               Delete
-  //             </button>
-  //           </td>
-  //         </tr>
-  //       );
-  //     }
-  //   });
-  // };
 
   handlePageChange = page => {
-    console.log(page);
+    this.setState({ currentPage: page });
   };
-  // handlePage = page => {
-  //   const { movies } = this.state;
-  //   const index = movies.indexOf(movie);
 
-  //   switch (page) {
-  //     case 1:
-  //       if (index < 4) {
-  //         () => this.displayMovies(index);
-  //       }
-  //     case 2:
-  //       if (9 < index >= 4) {
-  //         () => this.displayMovies(index);
-  //       }
-  //     case 3:
-  //       if (14 < index >= 9) {
-  //         () => this.displayMovies(index);
-  //       }
-  //   }
-  // };
   render() {
     const { length: count } = this.state.movies;
+    const { pageSize, currentPage } = this.state;
     if (count === 0) return <p>There are no movies in the database.</p>;
     return (
       <Fragment>
@@ -116,8 +72,9 @@ class Movies extends Component {
         </table>
         <Pagination
           itemsCount={count}
-          pageSize={this.state.pageSize}
-          onPageChage={this.handlePageChange}
+          pageSize={pageSize}
+          onPageChange={this.handlePageChange}
+          currentPage={currentPage}
         />
       </Fragment>
     );
