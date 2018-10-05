@@ -1,9 +1,8 @@
 import React from "react";
 import { getGenres } from "../../services/fakeGenreService";
 
-const genreList = props => {
+const genreList = ({ onGenreChange, onDisplayAll }) => {
   const genres = getGenres();
-  const { onGenreChange, onDisplayAll } = props;
   return (
     <ul className="list-group">
       <li key={0} className="list-group-item list-group-item-action active">
