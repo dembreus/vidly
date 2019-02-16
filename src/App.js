@@ -1,6 +1,7 @@
-import React, { Component } from "react";
-import Movies from "./components/movies";
+import React, { Component, Fragment } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import Movies from "./components/movies";
 import Customers from "./components/customers";
 import Rentals from "./components/rentals";
 import MovieForm from "./components/movieForm";
@@ -8,12 +9,14 @@ import NavBar from "./components/navBar";
 import NotFound from "./components/notFound";
 import LoginForm from "./components/loginForm";
 import RegisterForm from "./components/registerForm";
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
 class App extends Component {
   render() {
     return (
-      <React.Fragment>
+      <Fragment>
+        <ToastContainer />
         <NavBar />
         <main className="container">
           <Switch>
@@ -28,7 +31,7 @@ class App extends Component {
             <Redirect to="/not-found" />
           </Switch>
         </main>
-      </React.Fragment>
+      </Fragment>
     );
   }
 }
