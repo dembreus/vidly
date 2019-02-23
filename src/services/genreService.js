@@ -1,12 +1,6 @@
-export const genres = fetch("http://dry-meadow-34899.heroku.com/api/genres")
-  .then(async function(response) {
-    return response.json();
-  })
-  .then(function(myJson) {
-    JSON.stringify(myJson);
-    console.log(JSON.stringify(myJson));
-  });
+import http from "./httpService";
+import { apiUrl } from "../config.json";
 
 export function getGenres() {
-  return genres;
+  return http.get(`${apiUrl}/genres`);
 }
