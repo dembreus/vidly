@@ -9,10 +9,18 @@ import NavBar from "./components/navBar";
 import NotFound from "./components/notFound";
 import LoginForm from "./components/loginForm";
 import RegisterForm from "./components/registerForm";
+import Logout from "./components/logout";
+import auth from "./services/authService";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
 class App extends Component {
+  state = {};
+
+  componentDidMount() {
+    const user = auth.getCurrentUser();
+    this.setState({ user });
+  }
   render() {
     return (
       <Fragment>
@@ -21,6 +29,7 @@ class App extends Component {
         <main className="container">
           <Switch>
             <Route path="/register" component={RegisterForm} />
+            <Route path="/logout" component={Logout} />
             <Route path="/login" component={LoginForm} />
             <Route path="/rentals" component={Rentals} />
             <Route path="/customers" component={Customers} />

@@ -1,7 +1,7 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Link, NavLink } from "react-router-dom";
 
-const NavBar = () => {
+const NavBar = ({ user }) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <Link className="navbar-brand" to="/">
@@ -11,31 +11,61 @@ const NavBar = () => {
         className="navbar-toggler"
         type="button"
         data-toggle="collapse"
-        data-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
         <span className="navbar-toggler-icon" />
       </button>
-      <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div className="navbar-nav">
-          <NavLink className="nav-item nav-link" to="/movies">
-            Movies
-          </NavLink>
-          <NavLink className="nav-item nav-link" to="/customers">
-            Customers
-          </NavLink>
-          <NavLink className="nav-item nav-link" to="/rentals">
-            Rentals
-          </NavLink>
-          <NavLink className="nav-item nav-link" to="/login">
-            Login
-          </NavLink>
-          <NavLink className="nav-item nav-link" to="/register">
-            Register
-          </NavLink>
-        </div>
+      <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul className="navbar-nav mr-auto">
+          <li className="nav-item">
+            <NavLink className="nav-link" to="/movies">
+              Movies
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink className="nav-link" to="/customers">
+              Customers
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink className="nav-link" to="/rentals">
+              Rentals
+            </NavLink>
+          </li>
+          {!user && (
+            <Fragment>
+              {" "}
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/login">
+                  Login
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/register">
+                  Register
+                </NavLink>
+              </li>
+            </Fragment>
+          )}
+          {user && (
+            <Fragment>
+              {" "}
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/profile">
+                  {user.name}
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/logout">
+                  Logout
+                </NavLink>
+              </li>
+            </Fragment>
+          )}
+        </ul>
       </div>
     </nav>
   );
